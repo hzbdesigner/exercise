@@ -42,7 +42,7 @@ export default {
         ...action.payload
       }
     },
-    itemChange(state, action){
+    depthChange(state, action){
       return {
         ...state,
         ...action.payload

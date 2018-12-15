@@ -3,14 +3,22 @@ import {connect} from 'dva';
 import DepthListContainer from './depth';
 import depthActions from './depth/actions';
 
-const Trade = () => {
+export const TradeActions = ({close,reconnect})=>{
+	return (
+		<div>
+			<div className="closeBtn" onClick={close}>Close depth stream</div>
+			<div className="reconnectBtn" onClick={reconnect}>Reconnect depth stream</div>
+		</div>
+	)
+}
+
+export default () => {
   return (
     <div>
     	<div className="p10">Place Order</div>
-      <div onClick={depthActions.close}>Close depth stream</div>
-      <div onClick={depthActions.reconnect}>Reconnect depth stream</div>
+    	<TradeActions close={depthActions.close} reconnect={depthActions.reconnect} />
       <DepthListContainer />
     </div>
   );
-};
-export default Trade;
+}
+

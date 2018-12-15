@@ -15,5 +15,5 @@ export default {
       hardSource: false,
     }],
   ],
-  routes
+  routes:null,
 }

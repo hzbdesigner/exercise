@@ -1,20 +1,28 @@
 
 export const reconnect = ()=>{
-  window.g_app._store.dispatch({
-    type:'depth/reconnect'
-  })
+  const dispatch = window.g_app && window.g_app._store && window.g_app._store.dispatch
+  if(dispatch){
+    dispatch({
+      type:'depth/reconnect'
+    })
+  }
 }
 export const close = ()=>{
-  console.log('close action')
-  window.g_app._store.dispatch({
-    type:'depth/close'
-  })
+  const dispatch = window.g_app && window.g_app._store && window.g_app._store.dispatch
+  if(dispatch){
+    dispatch({
+      type:'depth/close'
+    })
+  }
 }
 export const depthChange = (payload)=>{
-  window.g_app._store.dispatch({
-    type:'depth/itemChange',
-    payload,
-  })
+  const dispatch = window.g_app && window.g_app._store && window.g_app._store.dispatch
+  if(dispatch){
+    dispatch({
+      type:'depth/depthChange',
+      payload,
+    })
+  }
 }
 
 export default {
