@@ -1,4 +1,4 @@
-
+import routes from './router.config.js'
 // ref: https://umijs.org/config/
 export default {
   plugins: [
@@ -15,4 +15,5 @@ export default {
       hardSource: false,
     }],
   ],
+  routes
 }
