@@ -15,7 +15,9 @@ export default {
       hardSource: false,
     }],
   ],
-  // routes:null,
   routes,
   hash:true,
+  //ref: https://umijs.org/zh/guide/deploy.html
+  base:'/exercise', 
+  publicPath: "/exercise/"
 }

@@ -19,6 +19,8 @@
 
 ## 运行
 
+在线demo：[]()
+
 
 本地运行
 ```
@@ -32,11 +34,13 @@ npm test
 npm test
 ```
 
-打包发布到github gh pages
+打包发布到github gh-pages
 ```
 npm run build
 npm run deploy-github
 ```
+
+
 
 
 
