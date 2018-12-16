@@ -9,7 +9,6 @@ export default {
     symbol:'BTCUSDT',
     level:20,
     item:{},
-    items:[],
     loading:true,
   },
   subscriptions: {
