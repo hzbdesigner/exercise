@@ -36,10 +36,8 @@ export default {
       if(socket){
         socket.close()
       }
-      
     },
     *reconnect({payload},{call,select,put}){
-      const {socket} = yield select(({ depth }) => depth )
       yield put({type:'connect'})
     },
     *init({payload},{call,select,put}){
@@ -47,7 +45,7 @@ export default {
       if(payload.market && payload.market !== market){
         if(socket){
           yield put({type:'close'})
-          yield put({type:'depthChange',payload:{item:{},loading:true}})
+          yield put({type:'reset'})
         }
         yield put({type:'marketChange',payload})
       }
@@ -72,6 +70,13 @@ export default {
         ...state,
         ...action.payload
       }
-    }
+    },
+    reset(state, action){
+      return {
+        ...state,
+        item:{},
+        loading:true,
+      }
+    },
   }
 };
