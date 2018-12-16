@@ -6,7 +6,7 @@ export default {
   namespace,
   state: {
     socket:null,
-    symbol:'BTCUSDT',
+    market:'BTC-USDT',
     level:20,
     item:{},
     loading:true,
@@ -16,16 +16,17 @@ export default {
       history.listen(({pathname})=> {
         console.log('pathname',pathname)
         if (pathname.indexOf('/trade')>-1) {
-          const symbol = pathname.replace('/trade','').replace('/','')
-          console.log('symbol',symbol)
-          dispatch({type: 'init',payload:{symbol}});
+          const market = pathname.replace('/trade','').replace('/','')
+          console.log('market',market)
+          dispatch({type: 'init',payload:{market}});
         }
       })
     },
   },
   effects: {
     *connect({payload},{call,select,put}){
-      const {symbol,level} = yield select(({ depth }) => depth )
+      const {market,level} = yield select(({ depth }) => depth )
+      const symbol =  market.replace('-','')
       const url = `wss://stream.binance.cloud:9443/ws/${symbol.toLowerCase()}@depth${level}`
       const socket = yield call(getDepthSocket,url)
       yield put({type:'socketChange',payload:{socket}})
@@ -34,13 +35,18 @@ export default {
       const {socket} = yield select(({ depth }) => depth )
       socket.close()
     },
-    *init({payload},{call,select,put}){
-      if(payload.symbol){
-        yield put({type:'symbolChange',payload})
-      }
+    *reconnect({payload},{call,select,put}){
       yield put({type:'connect'})
     },
-    *reconnect({payload},{call,select,put}){
+    *init({payload},{call,select,put}){
+      const {market,level,socket} = yield select(({ depth }) => depth )
+      if(payload.market && payload.market !== market){
+        if(socket){
+          yield put({type:'close'})
+          yield put({type:'depthChange',payload:{item:{}}})
+        }
+        yield put({type:'marketChange',payload})
+      }
       yield put({type:'connect'})
     },
   },
@@ -57,7 +63,7 @@ export default {
         ...action.payload
       }
     },
-    symbolChange(state, action){
+    marketChange(state, action){
       return {
         ...state,
         ...action.payload
