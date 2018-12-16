@@ -17,7 +17,8 @@ export default {
   ],
   routes,
   hash:true,
+  history: 'hash',
   //ref: https://umijs.org/zh/guide/deploy.html
-  base:'/exercise', 
+  base:'/exercise',
   publicPath: "/exercise/"
 }
