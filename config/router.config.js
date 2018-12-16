@@ -6,14 +6,18 @@ export default [
       { path: '/', redirect: '/market' },
       {
         path: '/market',
-        name: 'market',
+        exact: true,
         component: './market',
       },
       {
         path: '/trade',
-        name: 'trade',
+        exact: true,
         component: './trade',
-      }
+      },
+      {
+        path: '/trade/:symbol',
+        component: './trade',
+      },
     ]
   }
 ];

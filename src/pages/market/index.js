@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'dva';
+import routeActions from '@/utils/routeActions';
 
 const MarketItem = ({item})=> {
 	return (
-		<div className="p10">
+		<div onClick={()=>routeActions.gotoPath(`/trade/${item.symbol}`)} className="p10">
 				{item.symbol}
 		</div>
 	)

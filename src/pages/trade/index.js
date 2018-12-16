@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'dva';
-import DepthListContainer from './depth';
+import DepthContainer from './depth';
 import depthActions from './depth/actions';
 
 export const TradeActions = ({close,reconnect})=>{
@@ -17,7 +17,7 @@ export default () => {
     <div>
     	<div className="p10">Place Order</div>
     	<TradeActions close={depthActions.close} reconnect={depthActions.reconnect} />
-      <DepthListContainer />
+      <DepthContainer />
     </div>
   );
 }

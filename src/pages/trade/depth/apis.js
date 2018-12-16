@@ -1,8 +1,8 @@
 import request from '@/utils/request';
 import {depthChange} from './actions';
 
-export const getDepthSocket = (payload)=>{
-  const socket = new WebSocket("wss://stream.binance.cloud:9443/ws/bnbbtc@depth20");
+export const getDepthSocket = (url)=>{
+  const socket = new WebSocket(url);
   socket.onclose = function(evt) {
     console.log("Connection closed.");
   };
