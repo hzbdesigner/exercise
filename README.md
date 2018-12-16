@@ -11,21 +11,15 @@
 	- 当前版本暂未实现 TypeScript
 	- 当前版本暂未实现 SSR 功能
 
-## 页面
-
-- market
-- trade
-
 ## 运行
 
-在线demo：[]()
+访问在线demo：[https://hzbdesigner.github.io/exercise](https://hzbdesigner.github.io/exercise)
 
 
 本地运行
 ```
 npm install
 npm start
-npm test
 ```
 
 单元测试
