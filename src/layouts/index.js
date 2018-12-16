@@ -7,5 +7,4 @@ function BasicLayout(props) {
     </div>
   );
 }
-
 export default BasicLayout;
