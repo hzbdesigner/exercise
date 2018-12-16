@@ -3,16 +3,15 @@ import {connect} from 'dva';
 import DepthContainer from './depth';
 import depthActions from './depth/actions';
 import routeActions from '@/utils/routeActions';
-import {Button} from 'antd-mobile';
 
 export const TradeActions = ({close,reconnect})=>{
 	return (
-		<div className="row ml0 mr0 zb-b-t bg-white no-gutters" style={{position:'absolute',left:0,bottom:0,right:0}}>
-			<div className="col-6">
-				<Button onClick={close} type="primary" size="" className="closeBtn m10">Close Socket</Button>
+		<div className="row ml0 mr0 no-gutters" style={{position:'absolute',left:0,bottom:0,right:0}}>
+			<div onClick={close} className="col-6 closeBtn bg-red-500 fs16 cursor-pointer color-white center-center p15">
+				Close Socket
 			</div>
-			<div className="col-6">
-				<Button onClick={reconnect} type="primary" size="" className="reconnectBtn m10" >Reconnect Socket</Button>
+			<div onClick={reconnect} className="col-6 reconnectBtn bg-green-500 fs16 cursor-pointer color-white center-center p15">
+				Reconnect Socket
 			</div>
 		</div>
 	)

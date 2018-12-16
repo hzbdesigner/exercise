@@ -4,10 +4,10 @@ export default {
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
-      antd: true,
+      antd: false,
       dva: true,
       dynamicImport: false,
-      title: 'umiDEX',
+      title: 'Test Exchange',
       dll: false,
       routes: {
         exclude: [],
