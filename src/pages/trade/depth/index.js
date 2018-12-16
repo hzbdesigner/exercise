@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'dva';
+import routeActions from '@/utils/routeActions';
+
 const getAssets = (market)=>{
   const assets = market.split('-')
   return {
@@ -99,6 +101,11 @@ export const Depth = ({depth={}}) => {
   const assets = getAssets(depth.market)
   return (
     <div>
+      <div className="row no-gutters ml0 mr0 zb-b-b pt10 pb10">
+        <div onClick={routeActions.goBack} className="col-auto fs12 cursor-pointer" style={{width:'50px'}}>〈 Back</div>
+        <div className="col fs16">{market}</div>
+        <div className="col-auto"  style={{width:'5rem'}}></div>
+      </div>
       <div className="row no-gutters ml0 mr0 zb-b-b">
         <div className="col-6">
           <SellList items={asks} loading={depth.loading} assets={assets} />

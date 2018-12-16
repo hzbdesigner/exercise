@@ -35,10 +35,14 @@ export default {
       const {socket} = yield select(({ depth }) => depth )
       if(socket){
         socket.close()
+        yield put({type:'socketChange',payload:{socket:null}})
       }
     },
     *reconnect({payload},{call,select,put}){
-      yield put({type:'connect'})
+      const {socket} = yield select(({ depth }) => depth )
+      if(!socket){
+        yield put({type:'connect'})
+      }
     },
     *init({payload},{call,select,put}){
       const {market,level,socket} = yield select(({ depth }) => depth )
