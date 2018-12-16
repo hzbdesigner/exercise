@@ -31,7 +31,6 @@ export default {
       }
     },
   },
-
   reducers: {
     fetchStart(state, action) {
       return {

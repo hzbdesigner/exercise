@@ -17,4 +17,5 @@ export default {
   ],
   // routes:null,
   routes,
+  hash:true,
 }
