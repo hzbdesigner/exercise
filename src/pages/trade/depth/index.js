@@ -11,9 +11,9 @@ const SellList = ({items=[],loading,assets={}})=>{
   return (
     <table className="w-100 fs12">
       <thead>
-        <tr className="">
-          <th className="zb-b-b text-left pl10 pt5 pb5 font-weight-normal color-black-3">Amount ({assets.base})</th>
-          <th className="zb-b-b text-right pr5 pt5 pb5 font-weight-normal color-black-3">Price  ({assets.quote})</th>
+        <tr className="fs11">
+          <th className="zb-b-b text-left pl10 pt10 pb10 font-weight-normal color-black-3">Amount/{assets.base}</th>
+          <th className="zb-b-b text-right pr5 pt10 pb10 font-weight-normal color-black-3">Price/{assets.quote}</th>
         </tr>
       </thead>
       <tbody>
@@ -53,9 +53,9 @@ const BuyList = ({items=[],loading,assets={}})=>{
   return (
     <table className="w-100 fs12">
       <thead>
-        <tr className="">
-          <th className="zb-b-b text-left pl5 pt5 pb5 font-weight-normal color-black-3">Price ({assets.quote})</th>
-          <th className="zb-b-b text-right pr10 pt5 pb5 font-weight-normal color-black-3">Amount ({assets.base})</th>
+        <tr className="fs11">
+          <th className="zb-b-b text-left pl5 pt10 pb10 font-weight-normal color-black-3">Price/{assets.quote}</th>
+          <th className="zb-b-b text-right pr10 pt10 pb10 font-weight-normal color-black-3">Amount/{assets.base}</th>
         </tr>
       </thead>
       <tbody>
