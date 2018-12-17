@@ -6,9 +6,11 @@ export default {
   namespace,
   state: {
     socket:null,
-    market:'BTC-USDT',
-    level:20,
-    item:{},
+    market:null,
+    data:{
+      bids:[],
+      asks:[],
+    },
     loading:true,
   },
   subscriptions: {
@@ -16,8 +18,7 @@ export default {
       history.listen(({pathname})=> {
         console.log('pathname',pathname)
         if (pathname.indexOf('/trade')>-1) {
-          const market = pathname.replace('/trade','').replace('/','')
-          console.log('market',market)
+          const market = pathname.replace('/trade','').replace('/','') || 'BTC-USDT' // set default market 
           dispatch({type: 'init',payload:{market}});
         }
       })
@@ -25,35 +26,47 @@ export default {
   },
   effects: {
     *connect({payload},{call,select,put}){
-      const {market,level} = yield select(({ depth }) => depth )
-      const symbol =  market.replace('-','')
-      const url = `wss://stream.binance.cloud:9443/ws/${symbol.toLowerCase()}@depth${level}`
-      const socket = yield call(getDepthSocket,url)
-      yield put({type:'socketChange',payload:{socket}})
+      const {market} = yield select(({ depth }) => depth )
+      const socket = yield call(getDepthSocket,{market})
+      yield put({type:'socketChange',payload:{socket}}) 
     },
     *close({payload},{call,select,put}){
       const {socket} = yield select(({ depth }) => depth )
       if(socket){
         socket.close()
         yield put({type:'socketChange',payload:{socket:null}})
+      }else{
+        console.log('Connection to be closed ,but socket null ')
       }
     },
     *reconnect({payload},{call,select,put}){
       const {socket} = yield select(({ depth }) => depth )
       if(!socket){
         yield put({type:'connect'})
+      }else{
+        console.log('Connection was opened , dont need reconnect')
       }
     },
     *init({payload},{call,select,put}){
-      const {market,level,socket} = yield select(({ depth }) => depth )
-      if(payload.market && payload.market !== market){
-        if(socket){
+      const {socket,market} = yield select(({ depth }) => depth )
+      if(socket){
+        if(payload.market !== market ){
+          yield put({type:'marketChange',payload})  
           yield put({type:'close'})
           yield put({type:'reset'})
+          yield put({type:'connect'})
         }
-        yield put({type:'marketChange',payload})
+      }else{
+        yield put({type:'marketChange',payload})  
+        yield put({type:'connect'})
       }
-      yield put({type:'connect'})
+    },
+    *onConnect({payload},{call,select,put}){
+      const {market} = yield select(({ depth }) => depth )
+      if(market !== payload.market){
+        console.log('Connection closed pre',payload.market)
+        payload.socket.close() // fix bug: multiple depth sockets active 
+      }
     },
   },
   reducers: {
@@ -78,7 +91,10 @@ export default {
     reset(state, action){
       return {
         ...state,
-        item:{},
+        data:{
+          bids:[],
+          asks:[],
+        },
         loading:true,
       }
     },

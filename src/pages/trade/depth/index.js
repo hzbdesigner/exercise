@@ -96,8 +96,8 @@ const BuyList = ({items=[],loading,assets={}})=>{
 
 export const Depth = ({depth={}}) => {
   const { market } = depth
-  const bids = ( depth.item && depth.item.bids) || []
-  const asks = ( depth.item && depth.item.asks) || []
+  const bids = ( depth.data && depth.data.bids) || []
+  const asks = ( depth.data && depth.data.asks) || []
   const assets = getAssets(depth.market)
   return (
     <div>

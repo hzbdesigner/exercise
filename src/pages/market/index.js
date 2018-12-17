@@ -5,9 +5,12 @@ import mockMarkets from './mock'; // mock markets which have depth data for test
 
 const MarketItem = ({item})=> {
 	return (
-		<div onClick={()=>routeActions.gotoPath(`/trade/${item.baseAsset}-${item.quoteAsset}`)} className="row zb-b-b p15 ml0 mr0 no-gutters cursor-pointer">
-			<div className="col-auto fs14">{item.baseAsset}-{item.quoteAsset}</div>
-			<div className="col">
+		<div onClick={()=>routeActions.gotoPath(`/trade/${item.baseAsset}-${item.quoteAsset}`)} className="row zb-b-b p15 ml0 mr0 no-gutters align-items-center cursor-pointer">
+			<div className="col text-left">
+				<div className="fs14">{item.baseAsset}-{item.quoteAsset}</div>
+			</div>
+			<div className="col-auto">
+				<div className="fs12 color-black-3"> Trade 〉 </div>
 			</div>
 		</div>
 	)
